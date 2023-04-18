@@ -2,7 +2,12 @@ const startButton = document.querySelector('[data-button-start]')
 const pauseButton = document.querySelector('[data-button-pause]')
 const resetButton = document.querySelector('[data-button-reset]')
 
-var countDownDate = new Date("Jan 5, 2024 15:28:00").getTime();
+// const integerRegex = /\d+/;
+// const match = string.match(regex);
+// const value = parseInt(match[0]);
+
+console.log(value); // 25
+
 
 startButton.addEventListener('click', () => {
   // alert("Start button clicked")
@@ -12,13 +17,23 @@ startButton.addEventListener('click', () => {
 })
 
 function workTimerCountdown(workTimerDuration) {
-  setInterval(() => {
+  var timer = setInterval(() => {
     workTimerDuration -= 1
     // console.log(workTimerDuration);
-    var minutes = Math.floor(workTimerDuration / 60)
-    var seconds = Math.floor(workTimerDuration % 60)
 
-    document.getElementById("timer-minutes").innerHTML = minutes;
-    document.getElementById("timer-seconds").innerHTML = seconds;
+    if (workTimerDuration >= 0) {
+      var minutes = Math.floor(workTimerDuration / 60)
+      var seconds = Math.floor(workTimerDuration % 60)
+
+      document.getElementById("timer-minutes").innerHTML = minutes;
+      document.getElementById("timer-seconds").innerHTML = seconds;
+    } else {
+      document.getElementById("timer-minutes").innerHTML = "donezo";
+      document.getElementById("timer-seconds").innerHTML = "beep beep ";
+    };
   }, 1000);
 }
+
+pauseButton.addEventListener('click', () => {
+  clearInterval(window.timer)
+})
