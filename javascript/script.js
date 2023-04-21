@@ -6,8 +6,10 @@ const resetButton = document.querySelector('[data-button-reset]')
 // const match = string.match(regex);
 // const value = parseInt(match[0]);
 
-console.log(value); // 25
+// console.log(value); // 25
 
+// Can be used to track total number of loops
+// var timerCycles = 0
 
 startButton.addEventListener('click', () => {
   // alert("Start button clicked")
@@ -16,15 +18,15 @@ startButton.addEventListener('click', () => {
   workTimerCountdown(workTimerDuration)
 })
 
+var timerOn = true;
+
 function workTimerCountdown(workTimerDuration) {
-  var timer = setInterval(() => {
+  setInterval(() => {
     workTimerDuration -= 1
     // console.log(workTimerDuration);
-
-    if (workTimerDuration >= 0) {
+    if (workTimerDuration >= 0 && timerOn === true)  {
       var minutes = Math.floor(workTimerDuration / 60)
       var seconds = Math.floor(workTimerDuration % 60)
-
       document.getElementById("timer-minutes").innerHTML = minutes;
       document.getElementById("timer-seconds").innerHTML = seconds;
     } else {
@@ -35,5 +37,7 @@ function workTimerCountdown(workTimerDuration) {
 }
 
 pauseButton.addEventListener('click', () => {
-  clearInterval(window.timer)
+  // clearInterval(window.timer)
+  timerOn = false;
+  console.log('Pause clicked');
 })
