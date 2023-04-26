@@ -13,28 +13,18 @@ var workCycleText = document.getElementById("work-cycle-counter")
 
 // Can be used to track total number of loops
 
-var workTimerDuration = parseInt(document.getElementById("timer-input-value").innerHTML, 10) * 60 // Currently in SECONDS
-
-startButton.addEventListener('click', () => {
-  // alert("Start button clicked")
-  if (timerActive === false) {
-    timerActive = true
-    workTimerCountdown(workTimerDuration)
-    startButton.classList.toggle("active-timer")
-  } else {
-    console.log('There is already a timer active');
-  }
-})
+var workTimerDuration = parseInt(document.getElementById("timer-input-work-value").innerHTML, 10) * 60 // Currently in SECONDS
+var breakTimerDuration = parseInt(document.getElementById("timer-input-break-value").innerHTML, 10) * 60 // Currently in SECONDS
 
 var timerActive = false
 var timerPause = false
 // TODO: Can display # of workCycleCounter and cycle short with long break if % 4 === 0
 
-function workTimerCountdown(workTimerDuration) {
-  var workCycleCounter = 0
-  workCycleCounter += 1
+function timerCountdown(workTimerDuration) {
+  // var workCycleCounter = 0
+  // workCycleCounter += 1
   var timer = setInterval(() => {
-    workCycleText.innerHTML = workCycleCounter
+    // workCycleText.innerHTML = workCycleCounter
     workTimerDuration -= 1
     pauseTimeValue = workTimerDuration
     // console.log(workTimerDuration);
@@ -46,7 +36,7 @@ function workTimerCountdown(workTimerDuration) {
       // console.log('timer tick - if');
     }
     else {
-      workCycleText.innerHTML = workCycleCounter
+      // workCycleText.innerHTML = workCycleCounter
       //   document.getElementById("timer-minutes").innerHTML = "donezo";
       //   document.getElementById("timer-seconds").innerHTML = "beep beep ";
       console.log('timer tick - else');
@@ -57,6 +47,17 @@ function workTimerCountdown(workTimerDuration) {
   }, 100);
 }
 
+startButton.addEventListener('click', () => {
+  // alert("Start button clicked")
+  if (timerActive === false) {
+    timerActive = true
+    timerCountdown(workTimerDuration)
+    startButton.classList.add("active-timer")
+  } else {
+    console.log('There is already a timer active');
+  }
+})
+
 pauseButton.addEventListener('click', () => {
   // console.log('Pause clicked');
   timerPause = true
@@ -66,15 +67,15 @@ pauseButton.addEventListener('click', () => {
 continueButton.addEventListener('click', () => {
   // console.log('Continue button pressed');
   timerPause = false
-  workTimerCountdown(pauseTimeValue + 1)
+  timerCountdown(pauseTimeValue + 1)
 })
 
 resetButton.addEventListener('click', () => {
   // console.log('resetButton pressed');
   if (timerActive === true) {
     timerActive = false
-    startButton.classList.toggle("active-timer")
-    workTimerDuration = parseInt(document.getElementById("timer-input-value").innerHTML, 10) * 60
+    startButton.classList.remove("active-timer")
+    workTimerDuration = parseInt(document.getElementById("timer-input-work-value").innerHTML, 10) * 60
     // Can probably refactor this section
     var minutes = Math.floor(workTimerDuration / 60)
     var seconds = Math.floor(workTimerDuration % 60)
