@@ -1,6 +1,7 @@
 const startButton = document.querySelector('[data-button-start]')
 const pauseButton = document.querySelector('[data-button-pause]')
 const resetButton = document.querySelector('[data-button-reset]')
+const endButton = document.querySelector('[data-button-end]')
 const continueButton = document.querySelector('[data-button-continue]')
 var workCycleText = document.getElementById("work-cycle-counter")
 
@@ -18,27 +19,42 @@ var breakTimerDuration = parseInt(document.getElementById("timer-input-break-val
 
 var timerActive = false
 var timerPause = false
+var endSession = false
 // TODO: Can display # of workCycleCounter and cycle short with long break if % 4 === 0
 
-function timerCountdown(workTimerDuration) {
+// some aysnc? function await?
+// throw it in some sort of loop to repeat call timerCountdown
+
+
+//  number of cycles before long break: 3
+//  length of work cycle: 25min -  workTimerDuration
+//  length of short-break cycle: 5 mins - breakTimerDuration
+//  length of long-break cycle: 30 mins - breakTimerDuration * 6
+
+// [workTimerDuration, breakTimerDuration, workTimerDuration, breakTimerDuration, workTimerDuration, breakTimerDuration * 6]
+
+// how many workcycles you want to do
+// > 10
+//     > every 3 work cycles = 1 long break
+// >
+
+function timerCountdown(timerDuration) {
   // var workCycleCounter = 0
   // workCycleCounter += 1
   var timer = setInterval(() => {
     // workCycleText.innerHTML = workCycleCounter
-    workTimerDuration -= 1
-    pauseTimeValue = workTimerDuration
-    // console.log(workTimerDuration);
-    var minutes = Math.floor(workTimerDuration / 60)
-    var seconds = Math.floor(workTimerDuration % 60)
-    if (workTimerDuration >= 0 && timerActive === true && timerPause === false) {
+    timerDuration -= 1
+    pauseTimeValue = timerDuration
+    // console.log(timerDuration);
+    var minutes = Math.floor(timerDuration / 60)
+    var seconds = Math.floor(timerDuration % 60)
+    if (timerDuration >= 0 && timerActive === true && timerPause === false) {
+      // console.log('timer tick - if');
       document.getElementById("timer-minutes").innerHTML = minutes + "mins";
       document.getElementById("timer-seconds").innerHTML = seconds + "seconds";
-      // console.log('timer tick - if');
     }
     else {
       // workCycleText.innerHTML = workCycleCounter
-      //   document.getElementById("timer-minutes").innerHTML = "donezo";
-      //   document.getElementById("timer-seconds").innerHTML = "beep beep ";
       console.log('timer tick - else');
       clearInterval(timer)
       // console.log(pauseTimeValue + 1);
@@ -48,11 +64,14 @@ function timerCountdown(workTimerDuration) {
 }
 
 startButton.addEventListener('click', () => {
-  // alert("Start button clicked")
   if (timerActive === false) {
     timerActive = true
     timerCountdown(workTimerDuration)
-    startButton.classList.add("active-timer")
+    // + 1 count
+    // countdown but with breakTimerDuration
+    // % 4 === 0 , run a longbreakduration
+    // timerCountdown(breakTimerDuration)
+    // startButton.classList.add("active-timer")
   } else {
     console.log('There is already a timer active');
   }
@@ -73,8 +92,8 @@ continueButton.addEventListener('click', () => {
 resetButton.addEventListener('click', () => {
   // console.log('resetButton pressed');
   if (timerActive === true) {
-    timerActive = false
-    startButton.classList.remove("active-timer")
+    resetState()
+    // startButton.classList.remove("active-timer")
     workTimerDuration = parseInt(document.getElementById("timer-input-work-value").innerHTML, 10) * 60
     // Can probably refactor this section
     var minutes = Math.floor(workTimerDuration / 60)
@@ -86,3 +105,30 @@ resetButton.addEventListener('click', () => {
     console.log('No active timer to reset');
   }
 })
+
+function resetState() {
+  // console.log('Resetting pause and active')
+  timerPause = false;
+  timerActive = false;
+}
+
+endButton.addEventListener('click', () => {
+  console.log('endButton pressed');
+  // endSession = true
+  a = true
+})
+
+
+a = false
+
+
+// async function testLoop() {
+//   try {
+//     await a
+//       console.log('testLoop called - success');
+//   } catch {
+//     console.log('testLoop called - fail');
+//   }
+// }
+
+// testLoop()
