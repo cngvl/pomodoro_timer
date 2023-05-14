@@ -25,7 +25,6 @@ var endSession = false
 // some aysnc? function await?
 // throw it in some sort of loop to repeat call timerCountdown
 
-
 //  number of cycles before long break: 3
 //  length of work cycle: 25min -  workTimerDuration
 //  length of short-break cycle: 5 mins - breakTimerDuration
@@ -37,10 +36,16 @@ var endSession = false
 // > 10
 //     > every 3 work cycles = 1 long break
 // >
+function resetState() {
+  // console.log('Resetting pause and active')
+  timerPause = false;
+  timerActive = false;
+}
 
 function timerCountdown(timerDuration) {
   // var workCycleCounter = 0
   // workCycleCounter += 1
+  clearInterval(timer)
   var timer = setInterval(() => {
     // workCycleText.innerHTML = workCycleCounter
     timerDuration -= 1
@@ -57,21 +62,17 @@ function timerCountdown(timerDuration) {
       // workCycleText.innerHTML = workCycleCounter
       console.log('timer tick - else');
       clearInterval(timer)
-      // console.log(pauseTimeValue + 1);
     };
     // }, 1000); // TODO: Reset back to 1s timer
   }, 100);
 }
 
 startButton.addEventListener('click', () => {
+  // console.log('Start clicked');
   if (timerActive === false) {
     timerActive = true
+    console.log('startButton timerCountdown starting');
     timerCountdown(workTimerDuration)
-    // + 1 count
-    // countdown but with breakTimerDuration
-    // % 4 === 0 , run a longbreakduration
-    // timerCountdown(breakTimerDuration)
-    // startButton.classList.add("active-timer")
   } else {
     console.log('There is already a timer active');
   }
@@ -93,7 +94,6 @@ resetButton.addEventListener('click', () => {
   // console.log('resetButton pressed');
   if (timerActive === true) {
     resetState()
-    // startButton.classList.remove("active-timer")
     workTimerDuration = parseInt(document.getElementById("timer-input-work-value").innerHTML, 10) * 60
     // Can probably refactor this section
     var minutes = Math.floor(workTimerDuration / 60)
@@ -106,29 +106,8 @@ resetButton.addEventListener('click', () => {
   }
 })
 
-function resetState() {
-  // console.log('Resetting pause and active')
-  timerPause = false;
-  timerActive = false;
-}
-
-endButton.addEventListener('click', () => {
-  console.log('endButton pressed');
-  // endSession = true
-  a = true
-})
-
-
-a = false
-
-
-// async function testLoop() {
-//   try {
-//     await a
-//       console.log('testLoop called - success');
-//   } catch {
-//     console.log('testLoop called - fail');
-//   }
-// }
-
-// testLoop()
+// endButton.addEventListener('click', () => {
+//   console.log('endButton pressed');
+//   resetState();
+//   // endSession = true
+// })
