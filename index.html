@@ -1,25 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Pomodoro timer</title>
-  <link rel="stylesheet" href="/styles/style.css" type="text/css">
-  <script src="/javascript/script.js" defer></script>
-</head>
-<body>
-  <!-- <button onclick="setTimeout(myFunction, 3000)">Try it</button> -->
-  <!-- Need input forms -->
-  <div id="timer-input-work-value">2</div>
-  <div id="timer-input-break-value">1</div>
-  <div id="timer-minutes"></div>
-  <div id="timer-seconds"></div>
-  <div>Work cycle counter: <div id="work-cycle-counter"></div></div>
-  <button data-button-start>Start</button>
-  <button data-button-pause>Pause</button>
-  <button data-button-reset>Reset</button>
-  <button data-button-continue>Continue</button>
-  <!-- <button data-button-end>End session</button> -->
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pomodoro timer</title>
+    <link rel="stylesheet" href="/styles/style.css" type="text/css" />
+    <script src="/javascript/script.js" defer></script>
+  </head>
+  <body>
+    <!-- <button onclick="setTimeout(myFunction, 3000)">Try it</button> -->
+    <!-- Need input forms -->
+    <div id="timer-input-work">
+      <p>timer-input-work-value:</p>
+      <div id="timer-input-work-value">2</div>
+    </div>
+    <div id="timer-input-break">
+      <p>timer-input-break-value:</p>
+      <div id="timer-input-break-value">1</div>
+    </div>
+    <div id="timer">
+      <p>timer:</p>
+      <div id="timer-minutes"></div>
+      <div id="timer-seconds"></div>
+    </div>
+    <div>
+      Work cycle counter:
+      <div id="work-cycle-counter"></div>
+    </div>
+    <button data-button-start>Start</button>
+    <button data-button-pause>Pause</button>
+    <button data-button-reset>Reset</button>
+    <button data-button-continue>Continue</button>
+    <!-- <button data-button-end>End session</button> -->
+  </body>
 </html>
