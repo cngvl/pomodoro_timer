@@ -71,15 +71,33 @@ function timerCountdown(timerDuration) {
   }, 100);
 }
 
+var workSession = false;
+
 startButton.addEventListener("click", () => {
   // console.log('Start clicked');
+  // setInterval(() => {
   if (timerActive === false) {
     timerActive = true;
-    console.log("startButton timerCountdown starting");
+    // workSession = true;
+    // console.log("startButton timerCountdown starting");
     timerCountdown(workTimerDuration);
   } else {
     console.log("There is already a timer active");
   }
+  // }, 1000);
+  // setInterval(() => {
+  //   if (timerActive === false && workSession === false) {
+  //     timerActive = true;
+  //     workSession = true;
+  //     // console.log("startButton timerCountdown starting");
+  //     timerCountdown(workTimerDuration);
+  //   } else if (timerActive === true && workSession === true) {
+  //     // timerActive = true;
+  //     timerCountdown(breakTimerDuration);
+  //   } else {
+  //     console.log("There is already a timer active");
+  //   }
+  // }, 1000);
 });
 
 pauseButton.addEventListener("click", () => {
