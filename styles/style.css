@@ -1,3 +1,14 @@
 .active-timer {
   background-color: rgb(247 0 0);
 }
+
+.border {
+  border-style: dashed;
+  margin: 10px;
+  padding: 10px;
+}
+
+#buttons {
+  display: flex;
+  justify-content: space-evenly;
+}
